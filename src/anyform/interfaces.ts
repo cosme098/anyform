@@ -3,10 +3,13 @@ import { Style } from "util";
 
 
 export interface IAnyformInput {
-    styles?: any;
-    placeholder?: string;
+    noStyle?: boolean;
+    style?: React.CSSProperties;
+    className?: string;
+    id?: string;
+    hasFeedback?: boolean;
+    required?: boolean;
+    hidden?: boolean;
+    initialValue?: any;
+    messageVariables?: Record<string, string>;
 }
-
-export interface IAnyformInputGroup extends ReactChildren {
-    styles?: any;
-} 
