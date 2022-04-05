@@ -13,3 +13,12 @@ export interface IAnyformInput {
     initialValue?: any;
     messageVariables?: Record<string, string>;
 }
+
+
+export interface IAnyformTag {
+    style?: React.CSSProperties;
+    styleBtn?: React.CSSProperties;
+    children: any[];
+    onFailed: Function;
+    onSuccess: Function;
+}

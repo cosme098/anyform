@@ -1,6 +1,7 @@
 import React, { CSSProperties } from "react";
 import "./styles.css";
-import { IAnyformInput } from "./interfaces";
+import "./styles.css";
+import { IAnyformTag } from "./interfaces";
 
 const defaltInput: CSSProperties = {
     border: "0.7px solid #818181",
@@ -15,7 +16,7 @@ const defaltContainer: CSSProperties = {
     gap: "1rem",
 };
 
-export const AnyForm = (props: any) => {
+export const AnyForm = (props: IAnyformTag) => {
     const inputs: any[] = props.children;
     const totalValuesInputs: Array<any> = [];
     const customStyleContainer = props.style ? props.style : defaltContainer;
@@ -24,7 +25,7 @@ export const AnyForm = (props: any) => {
         inputs.forEach((input: any) => {
             if (input.props?.required) {
                 if (totalValuesInputs[input.props.name] == "") {
-                    return alert("Preencha todos os campos");
+                    throw new Error("Campo obrigatório");
                 }
             }
         });
@@ -35,22 +36,18 @@ export const AnyForm = (props: any) => {
         <div style={customStyleContainer}>
             {
                 inputs.map((input: any, index: number) => {
-
                     totalValuesInputs[input.props.name] = "";
-
                     const stylesInput = input.props.style ? input.props.style : defaltInput;
                     return (
                         <>
-                            <input placeholder={input.props.placeholder} required={true} key={index} style={stylesInput} onChange={(e) => {
+                            <input placeholder={input.props.placeholder} key={index} style={stylesInput} onChange={(e) => {
                                 totalValuesInputs[input.props.name] = e.target.value;
                             }} />
                         </>
                     );
                 })
             }
-            <button onClick={() => handleSubmit()}>
-                send
-            </button>
+            <button onClick={handleSubmit} className="button-16" >Enviar</button>
         </div>
     );
 }
