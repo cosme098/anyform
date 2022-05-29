@@ -24,7 +24,7 @@ export const AnyForm = (props: IAnyformTag) => {
     const handleSubmit = () => {
         inputs.forEach((input: any) => {
             if (input.props?.required) {
-                if (totalValuesInputs[input.props.name] == "") {
+                if (totalValuesInputs[input.props.name] === "") {
                     throw new Error("Campo obrigatório");
                 }
             }
@@ -39,11 +39,9 @@ export const AnyForm = (props: IAnyformTag) => {
                     totalValuesInputs[input.props.name] = "";
                     const stylesInput = input.props.style ? input.props.style : defaltInput;
                     return (
-                        <>
-                            <input placeholder={input.props.placeholder} key={index} style={stylesInput} onChange={(e) => {
-                                totalValuesInputs[input.props.name] = e.target.value;
-                            }} />
-                        </>
+                        <input placeholder={input.props.placeholder} key={index + "field"} style={stylesInput} onChange={(e) => {
+                            totalValuesInputs[input.props.name] = e.target.value;
+                        }} />
                     );
                 })
             }
